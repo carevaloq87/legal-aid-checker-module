@@ -57,9 +57,8 @@ $main_matters = $vars['main_matters'];
 			<div class="outcome-page">
 			</div>
 			
-			<hr class="col-xs-12" >
-			
-			<div class="col-xs-12">
+			<div class="col-xs-12 bottom">
+				<hr class="col-xs-12 split-line" >
 				<span class="wrong-link feedback-open" tabindex="0">Is there anything wrong with this page?</span>
 				<div class="col-xs-12 feedback-box">
 					<form>

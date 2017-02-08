@@ -102,5 +102,5 @@ $module_path = drupal_get_path('module', 'matter');
 	    
 		<header>
 			<div class="logo"><img src="/<?= $module_path ?>/images/cla-logo.png" alt="Victoria Legal Aid Logo" title="Victoria Legal Aid Logo" tabindex="0"></div>
-			<div class="search-bar"></div>
+			<div class="beta">BETA</div>
 		</header>

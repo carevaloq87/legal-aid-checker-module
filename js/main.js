@@ -1,4 +1,3 @@
-var breadcrumbs = []; //Global variable to keep breadcrumb
 var terminology_information = []; //Global variable to keep terminology
 
 $(function() {
@@ -30,8 +29,12 @@ function hide_loader() {
 
 // Open feedback box
 function open_feedback() {
+	$(".bottom").attr("style", "height: 60px");
+	$(".content").attr("style", "padding-bottom: " + $(".bottom").height() + "px");
 	$(".feedback-open").on("click", function(){
 		$(".feedback-box").fadeIn();
+		$(".bottom").removeAttr("style");
+		$(".content").attr("style", "padding-bottom: " + $(".bottom").height() + "px");
 	});
 	$('.feedback-open').keypress(function(e){
         if(e.which == 13 || e.which == 32){//Enter key pressed
@@ -44,6 +47,8 @@ function open_feedback() {
 function close_feedback() {
 	$(".feedback-close").on("click", function(){
 		$(".feedback-box").fadeOut();
+		$(".bottom").attr("style", "height: 60px");
+		$(".content").attr("style", "padding-bottom: " + $(".bottom").height() + "px");
 	});
 	$('.feedback-close').keypress(function(e){
         if(e.which == 13 || e.which == 32){//Enter key pressed
@@ -115,7 +120,6 @@ function open_acordion() {
 
 // Reset breadcrumb
 function reset_breadcrumb() {
-	breadcrumbs = [];
 	$(".breadcrum_element").remove();
 }
 
@@ -139,27 +143,35 @@ function click_accordion() {
 }
 
 // Add answer to breadcrumbs
-function add_to_breadcrumb(nid,text) {
-	var item = {};
-	item.nid = nid;
-	if(text.length > 25) {
-		item.text = text.substring(0, 23) + '...';
-	} else {
-		item.text = text;
+function set_breadcrumb(page_breadcrumb) {
+	var output = '';
+	for (var i = page_breadcrumb.length -1 ; i >= 0 ; i--) {
+		if(i % 2 == 0){
+			var nid = page_breadcrumb[i].nid;
+			var title = page_breadcrumb[i].title;
+			if(title.length > 25) {
+				title = title.substring(0, 23) + '...';
+			} 
+			output += "<span class='breadcrum_element' id='" + nid 
+			+ "'  tabindex='0'> <i class='fa fa-angle-right' aria-hidden='true'></i> " + title + "</span>";
+		}
 	}
-	
-	push_state_window_history(encodeURI(nid + "-" + text));
-	breadcrumbs.push(item);
-	$(".breadcrumbs").append("<span class='breadcrum_element' id='" + nid + "'  tabindex='0'> <i class='fa fa-angle-right' aria-hidden='true'></i> " + item.text + "</span>");
+	reset_breadcrumb();
+	$(".breadcrumbs").append(output);
+	var previous_url = encodeURI(page_breadcrumb[0].nid + "-" + page_breadcrumb[0].title);
+	if (window.history.state != null && !window.history.state.url.includes(previous_url)){
+		push_state_window_history(encodeURI(page_breadcrumb[0].nid + "-" + page_breadcrumb[0].title));
+		console.log(window.history.state.url);
+		console.log(previous_url);
+	} else if(window.history.state == null) {
+		push_state_window_history(encodeURI(page_breadcrumb[0].nid + "-" + page_breadcrumb[0].title));
+	}
 }
 
 // If an emlement in beadcrumb is clicked then remove elements after the clicked one
 function update_from_breadcrumb() {
 	$("body").on("click", ".breadcrum_element",function(){
 		var nid = $(this).attr("id"); 
-		var pos = $(".breadcrum_element").index(this);
-		breadcrumbs = breadcrumbs.slice(0, pos+1);
-		$(".breadcrum_element").slice(pos+1, $(".breadcrum_element").length).remove();
 		get_matter_by_nid(nid);
 	});
 	
@@ -171,7 +183,8 @@ function update_from_breadcrumb() {
 }
 
 // Set answers of questions at inner pages with Mustache JS 
-function set_answers(answers) {
+function set_answers(data) {
+	var answers = data.answers;
 	var answers_mustache = {answers:[]};
 	for (nid in answers) {
 		var title = answers[nid].title;
@@ -184,6 +197,7 @@ function set_answers(answers) {
     template = $("#answers-template").html();
 	var html = Mustache.to_html(template, answers_mustache);
 	$(targetContainer).html(html);
+	set_breadcrumb(data.breadcrumbs);
 }
 
 // Set questions at inner pages
@@ -204,7 +218,6 @@ function select_answer(){
 			var nid = $("input[name=optradio]:checked").attr("id");
 			var title = $("input[name=optradio]:checked").parent().text();
 			 get_matter_by_nid(nid);
-			 add_to_breadcrumb(nid, title);
 		}	
 	});
 	
@@ -220,7 +233,6 @@ function choose_main_matter() {
 	$(".matter-item").on("click", function(){
 		var nid = $(this).attr("id");
 		var title = $(this).find("h4").text();
-		add_to_breadcrumb(nid,title);
 		get_matter_by_nid(nid);
 	});	
 	
@@ -240,7 +252,7 @@ function get_matter_by_nid(nid) {
 	    hide_main_matter_sections();
 		set_question(data.question);
 		if(Object.keys(data.answers).length > 0) {
-			set_answers(data.answers);	
+			set_answers(data);
     		show_inner_section();
     		hide_outcome_page();
 		} else {
@@ -316,6 +328,7 @@ function set_outcome(outcome){
 	outcome_mustache.outcome.terminology_information = terminology_information;
 	var html = Mustache.to_html(template, outcome_mustache);
 	$(targetContainer).html(html);
+	set_breadcrumb(outcome.breadcrumbs);
 	add_tooltip_to_links();
 	highlight_underlined();
 	show_or_hide_terminology();
@@ -364,13 +377,8 @@ function send_feedback() {
 // Add tool tips to dynamic content
 function add_tooltip_to_links(){
 	//Just panel items
-	var extra_links = $(".useful-information .panel-collapse a");
-	/*for(val of extra_links){
-		$(val).attr("data-toggle","tooltip");
-		$(val).attr("title","Opens in new window");
-		$(val).attr("data-placement","bottom");
-		$(val).attr("target","_blank");
-	}*/
+	var extra_links = $(".useful-information .panel-collapse a, .tab-content a, .headline a, .footer a");
+	
 	for (var i = 0; i < extra_links.length; i++) {
 		$(extra_links[i]).attr("data-toggle","tooltip");
 		$(extra_links[i]).attr("title","Opens in new window");
@@ -378,7 +386,7 @@ function add_tooltip_to_links(){
 		$(extra_links[i]).attr("target","_blank");
 	}
 	//initialize tooltips for dynamic content
-	$('.useful-information .panel-collapse').tooltip({
+	$('.useful-information .panel-collapse, .tab-content, .headline, .footer').tooltip({
 	    selector: '[data-toggle="tooltip"]'
 	});
 }
@@ -422,7 +430,8 @@ function show_or_hide_terminology(){
 
 //Hide sections when Other oucome page is open
 function hide_sections(hide_headline) {
-	if((breadcrumbs.length > 0) && breadcrumbs[0].text == 'Other') {
+	var breadcrumb = $(".breadcrum_element");
+	if((breadcrumb.length > 0) && $(breadcrumb[0]).text().trim().toUpperCase() == 'Other'.toUpperCase()) {
 		$(".headline h3").show();
 		$(".headline h5").hide();
 		$(".heading-info").hide();
@@ -438,7 +447,7 @@ function hide_sections(hide_headline) {
 
 // Add a hash url to browser history
 function push_state_window_history(url) {
-    window.history.pushState({url: "checker#" + url + ""}, "", "checker#" +url);
+    window.history.pushState({url: "/matter/checker#" + url + ""}, "", "/matter/checker#" + url + "");
 }
 
 // Go back in history when back button is pressed

@@ -15,6 +15,22 @@ header {
   padding-top: 25px;
   height: 100px;
   background-color: $light_grey;
+  .logo{
+    float: left;
+  }
+  .beta{
+    float: right;
+    font-size: 15px;
+    line-height: 28px;
+    color: #808080;
+    position: relative;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 31px;
+    border-radius: 5px;
+    border: 2px solid #ddd;
+    margin-top: 18px;
+  }
 }
 
 h2{
@@ -37,8 +53,10 @@ h5{
   font-size: 20px;
   font-weight: bold;
 }
-hr{
+.split-line{
   border-color: $grey;
+  height: 1px;
+  margin-bottom: 10px;
 }
 .banner-section{
   padding: 0px;
@@ -84,9 +102,14 @@ hr{
     color: $black;
   }
   
+  .home-icon{
+    cursor: pointer;
+  }
+  
   .breadcrum_element{
     font-size: 15px;
     padding-left: 10px;
+    cursor: pointer;
     i{
         margin-right: 10px;
     }
@@ -109,6 +132,10 @@ hr{
 .content{
   padding-left: 10%;
   padding-right: 10%;
+  min-height: calc(100vh - 243px);
+  
+    position: relative;
+
   span{
     font-size: 18px;
   }
@@ -175,6 +202,13 @@ hr{
     .feedback-close{
       cursor: pointer;
     }
+  }
+  
+  .bottom{
+    position: absolute;
+    bottom: 0;
+    height: 185px;
+    width: 80%;
   }
 }
 
@@ -355,6 +389,9 @@ hr{
         margin-top: 10px;
         margin-left: 10px;
       }
+    }
+    .bottom{
+      height: 290px;
     }
   }
   .sidenav {

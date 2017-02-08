@@ -56,7 +56,8 @@ function get_question($nid) {
    foreach($question as $parent){
      $answers = get_childrens($parent->nid);
    }
-   return array('answers' => $answers, 'question' => $question);
+   $breadcrumbs = get_parent_information($nid);
+   return array('answers' => $answers, 'question' => $question,  'breadcrumbs' => $breadcrumbs);
 }
 
 /**
@@ -226,7 +227,6 @@ function get_outcome_page($nid) {
 function get_outcome(){
   if(isset($_GET['nid']) || isset($_POST['nid'])){
     extract($_REQUEST);
-    //var_dump($nid);
     $outcome_page_obj = array_values(get_outcome_page($nid))[0]; //get the first element in the array - should be just one
     if (isset($outcome_page_obj->field_useful_information['und'])){
       $get_useful_information = get_useful_information($outcome_page_obj->field_useful_information['und']);
@@ -240,6 +240,7 @@ function get_outcome(){
       $terminology_information = get_terminology($outcome_page_obj->field_terminology['und']);
       $outcome_page_obj->terminology_information = $terminology_information;
     }
+    $outcome_page_obj->breadcrumbs = get_parent_information($nid);
     return drupal_json_output($outcome_page_obj);
   }
   return drupal_json_output('');
@@ -307,5 +308,28 @@ function matter_form_alter(&$form, &$form_state, $form_id) {
   $types = array('office_directory', 'outcome', 'matter');
   if (isset($form['nid']['#value']) && isset($form['type']['#value']) && (in_array($form['type']['#value'], $types)) ) {
     //$form['additional_settings']['#access'] = FALSE;
+  }
+}
+
+function get_parent_information($nid) {
+  $parents_array = array();
+  get_all_parents($nid, $parents_array);
+  return $parents_array;
+}
+
+function get_all_parents($nid, &$parents_array) {
+  
+  $node = node_load($nid);
+  $node_relevant_info = array(
+                              'nid'        => $node->nid,
+                              'title'      => $node->title,
+                              'parent_nid' => (isset($node->field_parent["und"][0]["target_id"]) ? 
+                                                $node->field_parent["und"][0]["target_id"] : ''),
+                              );
+  array_push($parents_array, $node_relevant_info);
+  
+  if(!empty($node->field_parent)) {
+    //echo $node->field_parent['und'][0]['target_id'];
+    return $node->field_parent['und'][0]['target_id'] . " - " . get_all_parents($node->field_parent['und'][0]['target_id'], $parents_array);
   }
 }
