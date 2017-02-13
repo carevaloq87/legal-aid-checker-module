@@ -311,12 +311,18 @@ function matter_form_alter(&$form, &$form_state, $form_id) {
   }
 }
 
+/**
+ * Return parents information for breadcrumbs Title and nid 
+ */
 function get_parent_information($nid) {
   $parents_array = array();
   get_all_parents($nid, $parents_array);
   return $parents_array;
 }
 
+/**
+ * Get parent information for breadcrumbs Title and nid 
+ */
 function get_all_parents($nid, &$parents_array) {
   
   $node = node_load($nid);
