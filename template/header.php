@@ -17,7 +17,7 @@ $module_path = drupal_get_path('module', 'matter');
 		<meta charset="utf-8">
 		<link rel="shortcut icon" href="https://www.legalaid.vic.gov.au/profiles/vlapublic_profile/themes/custom/vlapublic_theme/favicon.ico" type="image/vnd.microsoft.icon" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta http-equiv="X-UA-Compatible" content="IE=10" /> 
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
 		<?php
 		foreach ($vars['css'] as $css) {
 	    ?>
