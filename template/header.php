@@ -13,6 +13,19 @@ $module_path = drupal_get_path('module', 'matter');
 		})(window,document,'script','dataLayer','GTM-TWDTW9B');</script>
 		<!-- End Google Tag Manager -->
 		
+		<!-- Google Analytics script -->
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+		
+		  ga('create', 'UA-91747146-1', 'auto');
+		  ga('send', 'pageview');
+		
+		</script>
+		<!-- Google Analytics script -->
+		
 		<title><?= $vars['title']; ?></title>
 		<meta charset="utf-8">
 		<link rel="shortcut icon" href="https://www.legalaid.vic.gov.au/profiles/vlapublic_profile/themes/custom/vlapublic_theme/favicon.ico" type="image/vnd.microsoft.icon" />
