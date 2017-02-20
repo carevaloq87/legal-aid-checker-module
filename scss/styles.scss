@@ -7,6 +7,7 @@ $light_blue: #009688;
 $black: #000;
 $banner_blue: #e4f1f6;
 $grey_border: #dddddd;
+$maroon: rgba(151,26,75,1);
 $font: "Arial Narrow", Arial, sans-serif;/*font-family:*/
 
 header {
@@ -47,7 +48,8 @@ h4{
   margin-top: 15px;
   margin-bottom: 5px;
   height: 20px;
-  text-align: center;
+  text-align: left;
+  color: $black;
 }
 h5{
   font-size: 20px;
@@ -142,16 +144,34 @@ h5{
   .matters-container {
     /*margin: -1%;*/
     margin-top: 15px;
+    .matter-box{
+      padding: 1%;
+    }
     .matter-item{
       position: relative;
-      margin: 1%;
       padding-left: 10px;
       padding-right: 10px;
       float: left;
-      height: 136px;
+      height: 102px;
       border-radius: 5px;
       border: 2px solid $grey;
       cursor: pointer;
+      box-shadow: 0px 2px 16px 0px rgba(220, 220, 220, 0.79);
+      &:hover{
+        background-color: $light_grey;
+      }
+      .matter-content{
+      padding-left: 0px;
+      padding-right: 0px;
+      position: relative;
+      }
+      .arrows{
+        padding-top: 41px;
+        padding-bottom: 41px;
+        padding-right: 2px !important;
+        color: $maroon;
+      }
+      
       .description{
         font-size: 13px;
         line-height: 14px;
@@ -381,7 +401,7 @@ h5{
     }
     .matters-container {
       .matter-item{
-        height: 100px;
+        height: 102px;
       }
     }
     .feedback-box{
@@ -431,11 +451,7 @@ h5{
     span{
       font-size: 16px;
     }
-    .matters-container{
-      .matter-item{
-        margin-left: 10%;
-      }
-    }
+
     .terminology{
       margin-left: 30px;
     }
@@ -453,4 +469,20 @@ h5{
     margin-left: 30px;
   } 
   
+}
+
+@media print {
+  header{
+    height: 70px;
+  
+    .logo{
+      img{
+          height: 20px;
+      }
+    }
+  }
+  
+  footer, .bottom, .print-icon, .beta {
+    display:none;
+  }
 }

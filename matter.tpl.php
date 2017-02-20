@@ -15,6 +15,7 @@ $main_matters = $vars['main_matters'];
 		
 	    <div class="breadcrumbs">
 	    	<span class="home-icon" tabindex="0"><i class="fa fa-home" aria-hidden="true"></i></span>
+	    	<span class="print-icon pull-right" tabindex="0" id="print-page"><i class="fa fa-print" aria-hidden="true"></i></span>
 	    </div>
 	    
 		<div class="row content main">
@@ -22,19 +23,31 @@ $main_matters = $vars['main_matters'];
 			<div class="main-content">				
 				<h3>Find out what to do or where to go for legal help</h3>
 				<span>To give you the right information we need to ask some general questions about your legal problem. Click on the topic below that best matches your legal question.</span>
-				<div class="matters-container">
-				    <?php
-				    foreach($main_matters as $matter) {
-				        ?>
-    					<div class="row matter-item col-xs-12 col-sm-4 col-md-2" id="<?= $matter['nid']; ?>" tabindex="0">
-    						<h4><?= $matter['title']; ?></h4>
-    						<p class="description"><?= $matter['description']['und'][0]['value']; ?></p>
-    						<span class="pull-right"><i class="fa fa-chevron-right" aria-hidden="true"></i></span>
-    					</div>
-				        <?php
-				    }
-				    ?>
-				</div>	
+				<div class="container">
+					<div class="matters-container">
+					    <?php
+					    foreach($main_matters as $matter) {
+					        ?>
+				        <div class="matter-box col-xs-12 col-sm-6 col-md-4 col-lg-3">
+	    					<div class="row">
+	    						<div class="matter-item col-xs-12" id="<?= $matter['nid']; ?>" tabindex="0">
+	    							<div class="row">
+	    								<div class="matter-content col-xs-10">
+	    									<h4><?= $matter['title']; ?></h4>
+				    						<p class="description"><?= $matter['description']['und'][0]['value']; ?></p>
+				    					</div>	
+	    								<div class="col-xs-2 arrows">
+	    									<i class="pull-right fa fa-chevron-right" aria-hidden="true"></i>
+										</div>
+									</div>
+								</div>
+	    					</div>
+	    				</div>
+					        <?php
+					    }
+					    ?>
+					</div>	
+				</div>
 			</div>
 			
 			<div class="inner-sections">

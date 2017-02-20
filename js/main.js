@@ -13,6 +13,7 @@ $(function() {
 	send_feedback();
 	pop_state_window_history();
 	load_hash_url();
+	on_print();
 });
 
 // Show Loader
@@ -161,8 +162,6 @@ function set_breadcrumb(page_breadcrumb) {
 	var previous_url = encodeURI(page_breadcrumb[0].nid + "-" + page_breadcrumb[0].title);
 	if (window.history.state != null && !window.history.state.url.includes(previous_url)){
 		push_state_window_history(encodeURI(page_breadcrumb[0].nid + "-" + page_breadcrumb[0].title));
-		console.log(window.history.state.url);
-		console.log(previous_url);
 	} else if(window.history.state == null) {
 		push_state_window_history(encodeURI(page_breadcrumb[0].nid + "-" + page_breadcrumb[0].title));
 	}
@@ -447,7 +446,9 @@ function hide_sections(hide_headline) {
 
 // Add a hash url to browser history
 function push_state_window_history(url) {
-    window.history.pushState({url: "/matter/checker#" + url + ""}, "", "/matter/checker#" + url + "");
+	var matter_url = "/matter/checker#" + url + "";
+    window.history.pushState({url: matter_url}, "", matter_url);
+    set_ga_page_view(matter_url);
 }
 
 // Go back in history when back button is pressed
@@ -455,22 +456,26 @@ function pop_state_window_history() {
 	window.onpopstate = function(e) {
 	    if (e.state) {
 	    	var prev_url = e.state.url.split('#')[1];
+	    	set_ga_page_view(prev_url);
 			var nid = prev_url.split('-')[0];
 			if (nid != '') {
 	    		get_matter_by_nid(nid);
 			} else {
 				$('.home-icon').click();
+				set_ga_page_view("/");
 			}
 	    } else {
 	    	$('.home-icon').click();
+				set_ga_page_view("/");
 	    }
 	};
 }
 
-// Load content when user come from hash URL or we site is refreshed
+// Load content when user come from hash URL or site is refreshed
 function load_hash_url() {
 	var hash_url = window.location.hash;
 	if (hash_url) {
+		set_ga_page_view(hash_url);
 		var pre_url = hash_url.split('#')[1];
 		var nid = pre_url.split('-')[0];
 		if (nid != '') {
@@ -485,3 +490,20 @@ function html_unescape(s) {
 	div.innerHTML = s;
 	return div.textContent || div.innerText; // IE is different
 }
+
+//Set page views into google analytics for has navigation
+function set_ga_page_view(url){
+	ga('set', 'page', url);
+	ga('send', 'pageview');
+}
+
+//Present all content inside accordion when printing
+function on_print(){
+	$("#print-page").on("click", function() {
+		$('#accordion .collapse').collapse('show');
+		setTimeout(function () {
+	        window.print();
+	    }, 1000);
+	})
+}
+
