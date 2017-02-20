@@ -34,14 +34,14 @@ $module_path = drupal_get_path('module', 'matter');
 		<?php
 		foreach ($vars['css'] as $css) {
 	    ?>
-		    <link rel="stylesheet" href="<?= $css; ?>">
+		    <link rel="stylesheet" href="<?= $css . '?date=' . time(); ?>">
 	    <?php
 		}
 		?>
 		<?php
 		foreach ($vars['js'] as $js) {
 	    ?>
-		    <script src="<?= $js; ?>"></script>
+		    <script src="<?= $js . '?date=' . time(); ?>"></script>
 	    <?php
 		}
 		?>
