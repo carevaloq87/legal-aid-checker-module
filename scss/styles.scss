@@ -482,6 +482,24 @@ h5{
     }
   }
   
+  .tabs-left{
+    display: none;
+  }
+  
+  .tab-content{
+    .tab-pane {
+      display: inline-block;
+      border-top: 1px solid #ccc;
+      b, strong{
+        display: none;
+      }
+    }
+  }
+  .where-to-go{
+    margin-top: 20px;
+  }
+  
+  
   footer, .bottom, .print-icon, .beta {
     display:none;
   }

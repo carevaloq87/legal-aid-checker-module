@@ -341,6 +341,18 @@ h5 {
     header .logo img {
       height: 20px; }
 
+  .tabs-left {
+    display: none; }
+
+  .tab-content .tab-pane {
+    display: inline-block;
+    border-top: 1px solid #ccc; }
+    .tab-content .tab-pane b, .tab-content .tab-pane strong {
+      display: none; }
+
+  .where-to-go {
+    margin-top: 20px; }
+
   footer, .bottom, .print-icon, .beta {
     display: none; } }
 
