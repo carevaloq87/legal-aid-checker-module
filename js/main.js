@@ -271,7 +271,7 @@ function get_outcome_by_nid(nid) {
 	  .done(function( data ) {
 	    set_outcome(data);
 		hide_loader();
-		open_acordion();
+		//open_acordion();
 	  });
 }
 
