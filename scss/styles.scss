@@ -4,7 +4,7 @@ $grey_dark: #9E9E9E;
 $silver: #C0C0C0;
 $blue: #337ab7;
 $light_blue: #009688;
-$black: #000;
+$black: #351f20;
 $banner_blue: #e4f1f6;
 $grey_border: #dddddd;
 $maroon: rgba(151,26,75,1);
@@ -55,10 +55,17 @@ h5{
   font-size: 20px;
   font-weight: bold;
 }
+
+body{
+  color: $black;
+}
+
+
 .split-line{
   border-color: $grey;
   height: 1px;
   margin-bottom: 10px;
+  margin-top: 10px;
 }
 .banner-section{
   padding: 0px;
@@ -104,7 +111,7 @@ h5{
     color: $black;
   }
   
-  .home-icon{
+  .home-icon, .print-icon{
     cursor: pointer;
   }
   
@@ -196,28 +203,28 @@ h5{
   }
   .wrong-link{
     color: $blue;
-    font-size: 14px;
+    font-size: 13px;
     cursor: pointer;
   }
   .feedback-box{
     display: none;
     background-color: $grey;
-    padding: 5px 10px 10px 20px;
+    padding: 15px 0px 10px 0px;
     margin-top: 10px;
-    .feedback-title{
-      font-size: 16px;
-      font-weight: bold;
-      margin-bottom: 0px;
-    }
     .feedback-description{
-      font-size: 14px;
+      font-size: 12px;
     }
     textarea{
       width: 100%;
     }
     .feedback-btn{
-      margin-top: 85px;
-      margin-left: 10px;
+      margin-left: 0px !important;
+      height: 46px;
+      width: 100%;
+      &:hover{
+        background-color: $light_grey;
+      }
+      
     }
     .feedback-close{
       cursor: pointer;
@@ -236,10 +243,13 @@ h5{
   padding-left: 10%;
   padding-right: 10%;
   background-color: $grey;
-  height: 123px;
+  height: 128px;
   .join-us{
     i{
       font-size: 20px;
+    }
+    h5{
+      margin-top: 15px;
     }
     span{
       font-size: 12px;
@@ -253,13 +263,15 @@ h5{
   .cfa-logo {
     padding-top: 15px;
     img{
-      width: 130px;   
-    }
-    p{
-      font-size: 11px;
+      width: 144px;   
     }
   }
+  .update {
+    font-size: 10px;
+  }
 }
+
+
 
 #modal{
   i{
@@ -295,7 +307,10 @@ h5{
     }
     p{
       margin-bottom: 0px;
-      line-height: 25px
+      line-height: 25px;
+      .small{
+        font-size: 10px;
+    }
     }
   }
   .terminology{
@@ -420,10 +435,22 @@ h5{
   }
   .row.content {height: auto;}
 }
- 
-.panel-title {
-  text-align: left;
-} 
+.useful-information{
+  padding-left: 0px;
+  .panel-group{
+    .panel {
+      .panel-heading{
+        &:hover{
+          background-color: darken($light_grey, 25%); //SASS function
+        }
+      }
+      .panel-title {
+        text-align: left;
+        height: 100%;
+      } 
+    }
+  }
+}
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) and (max-width: 991px) {
   h2{

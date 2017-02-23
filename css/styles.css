@@ -35,16 +35,20 @@ h4 {
   margin-bottom: 5px;
   height: 20px;
   text-align: left;
-  color: #000; }
+  color: #351f20; }
 
 h5 {
   font-size: 20px;
   font-weight: bold; }
 
+body {
+  color: #351f20; }
+
 .split-line {
   border-color: #DCDCDC;
   height: 1px;
-  margin-bottom: 10px; }
+  margin-bottom: 10px;
+  margin-top: 10px; }
 
 .banner-section {
   padding: 0px;
@@ -80,8 +84,8 @@ h5 {
   line-height: 35px;
   font-size: 20px; }
   .breadcrumbs .active {
-    color: #000; }
-  .breadcrumbs .home-icon {
+    color: #351f20; }
+  .breadcrumbs .home-icon, .breadcrumbs .print-icon {
     cursor: pointer; }
   .breadcrumbs .breadcrum_element {
     font-size: 15px;
@@ -90,7 +94,7 @@ h5 {
     .breadcrumbs .breadcrum_element i {
       margin-right: 10px; }
   .breadcrumbs .breadcrum_element:last-child {
-    color: #000; }
+    color: #351f20; }
 
 .inner-sections {
   display: none; }
@@ -147,24 +151,23 @@ h5 {
     cursor: pointer; }
   .content .wrong-link {
     color: #337ab7;
-    font-size: 14px;
+    font-size: 13px;
     cursor: pointer; }
   .content .feedback-box {
     display: none;
     background-color: #DCDCDC;
-    padding: 5px 10px 10px 20px;
+    padding: 15px 0px 10px 0px;
     margin-top: 10px; }
-    .content .feedback-box .feedback-title {
-      font-size: 16px;
-      font-weight: bold;
-      margin-bottom: 0px; }
     .content .feedback-box .feedback-description {
-      font-size: 14px; }
+      font-size: 12px; }
     .content .feedback-box textarea {
       width: 100%; }
     .content .feedback-box .feedback-btn {
-      margin-top: 85px;
-      margin-left: 10px; }
+      margin-left: 0px !important;
+      height: 46px;
+      width: 100%; }
+      .content .feedback-box .feedback-btn:hover {
+        background-color: #f5f5f5; }
     .content .feedback-box .feedback-close {
       cursor: pointer; }
   .content .bottom {
@@ -177,9 +180,11 @@ h5 {
   padding-left: 10%;
   padding-right: 10%;
   background-color: #DCDCDC;
-  height: 123px; }
+  height: 128px; }
   .footer .join-us i {
     font-size: 20px; }
+  .footer .join-us h5 {
+    margin-top: 15px; }
   .footer .join-us span {
     font-size: 12px;
     vertical-align: text-bottom;
@@ -189,9 +194,9 @@ h5 {
   .footer .cfa-logo {
     padding-top: 15px; }
     .footer .cfa-logo img {
-      width: 130px; }
-    .footer .cfa-logo p {
-      font-size: 11px; }
+      width: 144px; }
+  .footer .update {
+    font-size: 10px; }
 
 #modal i {
   font-size: 24px; }
@@ -220,6 +225,8 @@ h5 {
     .outcome-page .headline p {
       margin-bottom: 0px;
       line-height: 25px; }
+      .outcome-page .headline p .small {
+        font-size: 10px; }
   .outcome-page .terminology {
     padding: 3px 10px 5px 10px;
     border: solid 1px #dddddd;
@@ -304,8 +311,13 @@ h5 {
 
   .row.content {
     height: auto; } }
-.panel-title {
-  text-align: left; }
+.useful-information {
+  padding-left: 0px; }
+  .useful-information .panel-group .panel .panel-heading:hover {
+    background-color: #b5b5b5; }
+  .useful-information .panel-group .panel .panel-title {
+    text-align: left;
+    height: 100%; }
 
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) and (max-width: 991px) {
