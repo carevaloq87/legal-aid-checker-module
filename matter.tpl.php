@@ -69,26 +69,37 @@ $main_matters = $vars['main_matters'];
 			
 			<div class="outcome-page">
 			</div>
-			
-			<div class="col-xs-12 bottom">
-				<hr class="col-xs-12 split-line" >
-				<span class="wrong-link feedback-open" tabindex="0">Is there anything wrong with this page?</span>
-				<div class="col-xs-12 feedback-box">
-					<form>
-						<div class="col-xs-12 col-md-6">
-							<p class="feedback-title">Help us improve the Legal Aid Checker</p>
-							<p class="feedback-description">Your feedback is important in helping us improve the website. Please, do not include your personal or financial information.</p>
-							<textarea class="col-xs-6" name="suggestion" maxlength="512" id="suggestion"></textarea>
-							
-						</div>
-						<div class="col-xs-12 col-md-6">
-							<span class="pull-right feedback-close" tabindex="0"><i class="fa fa-times" aria-hidden="true"></i></span>
-							<button class="btn btn-default col-xs-5 col-md-3 feedback-btn">Send Feedback</button>
-						</div>
-					</form>
+		
+		<div class="matters-container">
+			<div class="row">	
+				<div class="matter-box col-xs-12 bottom">
+					<hr class="split-line" >
+					<span class="wrong-link feedback-open" tabindex="0">Found something wrong with this page?</span>
+					
+					<div class="col-xs-12 feedback-box">
+						<form>
+							<div class="row">
+								<div class="col-xs-10 col-sm-9">
+									<p class="small">Your feedback is important in helping us improve this website.</p>
+									<p class="small">Please, do not include your personal or financial information.</p>
+								</div>
+								<div class="col-xs-2 col-sm-3">
+									<span class="pull-right feedback-close" tabindex="0"><i class="fa fa-times" aria-hidden="true"></i></span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-12 col-sm-9">
+									<textarea class="col-xs-6" name="suggestion" maxlength="512" id="suggestion"></textarea>
+								</div>
+								<div class="col-xs-12 col-sm-3">
+									<button class="btn btn-default feedback-btn">Send Feedback</button>
+								</div>
+							</div>
+						</form>
+					</div>
 				</div>
 			</div>
-			
+		</div>					
 		</div>
 
 <?php
