@@ -504,6 +504,12 @@ function on_print(){
 		setTimeout(function () {
 	        window.print();
 	    }, 1000);
-	})
+	});
+	
+	$('#print-page').keypress(function(e){
+        if(e.which == 13){//Enter key pressed
+			$(this).click();
+        }
+    });
 }
 
